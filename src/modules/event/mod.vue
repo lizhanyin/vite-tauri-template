@@ -9,28 +9,32 @@ async function invoke(data, callback) {
   await tauri.invoke( 'event', {data: JSON.stringify(data)}).then((message) => callback(message));
 }
 
-
 async function setWindowTop(boolean) {
   let data = { command: 'set_window_top', value: boolean ? 'yes' : 'no' };
   await invoke(data, (message) => console.log(message));
 }
 
-const unlisten = async (boolean) => {
+let isListen = false;
+
+const listening = async (boolean) => {
   let data = { command: 'init_process', value: boolean ? 'yes' : 'no' };
   let rst;
   await invoke(data, (message) => (rst = message, console.log(message))); // 调用rust任务
-  rst || await listen('my-event', event => { // 监听事件
-    console.log(event);
-  });
+  if (!rst && !isListen){
+    isListen = true;
+    await listen('my-event', event => { // 监听事件
+      console.log(event);
+    });
+  }
 }
 
 </script>
 
 <template>
   <v-card
-    prepend-icon="mdi-computer"
-    title="Top"
-    subtitle="Set on top">
+    prepend-icon="mdi-gesture-tap-button"
+    title="Event"
+    subtitle="Some Event Demo">
 
     <v-card-text class="d-flex align-center">
       <v-btn
@@ -50,8 +54,15 @@ const unlisten = async (boolean) => {
       <v-btn
         color="primary"
         class="ms-3"
-        @click="unlisten(true)">
-        listening
+        @click="listening(true)">
+        listen
+      </v-btn>
+
+      <v-btn
+        color="primary"
+        class="ms-3"
+        @click="listening(false)">
+        unlisten
       </v-btn>
     </v-card-text>
 

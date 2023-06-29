@@ -13,7 +13,8 @@ struct Payload {
 }
 
 struct State{
-  listening: bool
+  listening: bool,
+  running: bool
 }
 
 #[tauri::command]
@@ -40,19 +41,25 @@ fn set_window_top(window: Window, data: Value) -> Value{
   Value::Bool(true)
 }
 
-static mut LISTENING_STATE: State = State{listening: false};
-fn init_process(window: Window, _data: Value) -> Value {
-  if !unsafe { LISTENING_STATE.listening } {
-    unsafe { LISTENING_STATE.listening = true };
+static mut LISTENING_STATE: State = State{listening: true, running: false};
+fn init_process(window: Window, data: Value) -> Value {
+  if !unsafe { LISTENING_STATE.running } {
+    unsafe { LISTENING_STATE.running = true };
 
     std::thread::spawn(move || {
       loop { // 循环触发
+        if !unsafe { LISTENING_STATE.listening } {
+          unsafe { LISTENING_STATE = State{listening: true, running: false} };
+          break;
+        }
         window.emit("my-event", Payload { message: "Tauri is awesome!".into() }).unwrap(); // 前端自动解析为对象
         thread::sleep(time::Duration::from_millis(1000)); // 每隔一秒执行
       }
     });
     return Value::Bool(false);
-  } 
+  } else if data == "no"{
+    unsafe { LISTENING_STATE.listening = false };
+  }
   return Value::Bool(true);
 }
 

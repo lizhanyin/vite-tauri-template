@@ -11,8 +11,10 @@ Tauri is a new modern technology to turn your web apps into a desktop app for mu
 ### Vue 3
 Vue.js is an incremental frontend framework which is an absolute joy to work with. It has seen very impressive improvements in version 3 including Composition Api, script setup, dynamic css binding and ... .
 
-### Vuetify 3
+### [Vuetify 3](https://vuetifyjs.com/)
 Vuetify is arguably the best component library for Vue 3 and is currently in alpha stage but will soon be ready for production. Lots of premade components will make your job as application developer easier and more fun.
+
+[Font](https://vuetifyjs.com/en/features/icon-fonts/)
 
 ## Installation
 - Ready your workspace according to Tauri. [Tauri Getting Started](https://tauri.app/v1/guides/getting-started/prerequisites/)
@@ -60,19 +62,21 @@ This launches Tauri window and you would see your app in the native window.
 
 3- Debug
 
-Vue - [安装devtools](https://blog.csdn.net/qq_37331806/article/details/126319661)
+Vue - [install devtools](https://blog.csdn.net/qq_37331806/article/details/126319661)
+
+run this command
 
 `cnpm install -g @vue/devtools`
  
-//若是没有cnpm可以使用下面这个
+or run this
 
 `npm install -g @vue/devtools`
 
-安装成功后，直接在cmd中运行：
+installed and run this command in cmd
 
 `vue-devtools`
 
-然后复制窗口里面的代码到项目的index.html文件中
+Then copy the code in the window to the index.html file
 
 
 ## Building
