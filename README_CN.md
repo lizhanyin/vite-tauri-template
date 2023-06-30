@@ -1,4 +1,4 @@
-# Vite Tauri 桌面应用程序模板
+# Vite Tauri 桌面应用程序模板([Fork From](https://github.com/yooneskh/vite-tauri-template))
 
 对于那些想要使用 Web 技术制作桌面应用程序的人来说，这是一个入门模板。 该模板使用以下技术栈
 

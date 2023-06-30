@@ -1,4 +1,4 @@
-# Vite Tauri Desktop Application Template
+# Vite Tauri Desktop Application Template ([Fork From](https://github.com/yooneskh/vite-tauri-template))
 
 This is a starter template for those who want to make a desktop application with web technologies. This template uses the below stack.
 
